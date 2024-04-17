@@ -1,7 +1,7 @@
 #include<iostream>
 #include<cmath>
 using namespace std;
-// Function to calculate the p-value for a two-sample t-test
+
 double calculatePValue(double x, double nu) {
     double t = fabs(x);
     double k = nu / (nu + t * t);
@@ -10,7 +10,7 @@ double calculatePValue(double x, double nu) {
 }
 
 int main() {
-    // input user data for group A (old version)
+
     int groupAVisits;
     cout<<"groupAVisits = ";
     cin>>groupAVisits;
@@ -19,7 +19,7 @@ int main() {
     cin>>groupAClicks;
     double groupACTR = static_cast<double>(groupAClicks) / groupAVisits;
 
-    // input user data for group B (redesigned version)
+ 
     int groupBVisits;
     cout<<"groupBVisits = ";
     cin>>groupBVisits;
@@ -28,24 +28,24 @@ int main() {
     cin>>groupBClicks;
     double groupBCTR = static_cast<double>(groupBClicks) / groupBVisits;
 
-    // Calculate pooled standard error
+
     double pooledSE = sqrt((groupACTR * (1 - groupACTR) / groupAVisits) + (groupBCTR * (1 - groupBCTR) / groupBVisits));
 
-    // Calculate t-statistic
+
     double tStatistic = (groupBCTR - groupACTR) / pooledSE;
 
-    // Degrees of freedom
+
     int nu = groupAVisits + groupBVisits - 2;
 
-    // Calculate p-value
+
     double pValue = calculatePValue(tStatistic, nu);
 
-    // Set significance level by user input
+
     double alpha;
     cout<<"alpha = ";
     cin>>alpha;
 
-    // Interpret results
+  
     if (pValue < alpha) {
         cout << "Reject the null hypothesis. There is a significant difference in CTR between the two groups." << endl;
         if (groupBCTR > groupACTR) {
